@@ -30,12 +30,13 @@ const generateSignature = async () => {
 
     try {
         const response = await axios.get(
-            `${API_URL}/users/${state.user.id}/signature`,
+            `${API_URL}/users/${state?.user?.id}/signature`,
             { headers: { Authorization: `Bearer ${state.token}` } }
         );
         state.signature = response.data?.data?.signature || "";
     } catch (error) {
-        state.errorMessage = error.message;
+        console.error(error);
+        state.errorMessage = "Something went wrong. Please try again.";
     } finally {
         state.loading = false;
     }
